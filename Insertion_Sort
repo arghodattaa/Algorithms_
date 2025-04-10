@@ -1,0 +1,27 @@
+#include<iostream>
+using namespace std;
+int main(){
+   int arr[10];
+   int i = 0;
+
+   while( i<10 ){
+    cin>>arr[i];
+    i++;
+   }
+     int temp ;
+   for(  i =1; i<10; i++){
+        temp = arr[i];
+        for( int j = i-1; j>=0; j--){
+            if( arr[j] > temp)arr[j+1]= arr[j];
+            else {
+                    arr[j+1] = temp;
+                    break;
+            }
+            if( j == 0)arr[0] = temp;
+        }
+   }
+   for( i = 0; i<10; i++){
+    cout<<arr[i]<<" ";
+   }
+}
+
