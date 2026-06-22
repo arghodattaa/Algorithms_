@@ -1,0 +1,64 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define int long long
+#define int128 __int128_t
+
+int bex( int a, int b, int mod){
+    if( b == 0)return 1;
+    a %= mod;
+    int re = 1LL;
+    while(b> 0LL){
+        if( (b&1LL)){
+            re = (int128)re*a %mod;
+        }
+        a = (int128)a*a %mod;
+        b>>=1LL;
+    }
+
+    return re;
+}
+
+bool hope_prime( int a, int d, int s, int n){
+
+   int x = (int128)bex(a, d, n);
+   if( x == 1LL || x == n-1)return true;
+
+   for( int i = 1; i<= s; i++){
+        x = (int128)x*x %n;
+        if( x == n-1)return true;
+   }
+
+   return false;
+}
+
+bool milar( int n){
+   if( n< 4){
+    return (n == 2 || n == 3);
+   }
+   if( (n&1LL) == 0)return false;
+
+   int s = 0, d = n-1;
+   while( (d&1LL) == 0){
+    s++; d >>=1LL;
+   }
+
+   for( int i = 1; i<5; i++){
+        int a = 2LL+ rand()%(n-3LL);
+      if( !hope_prime(a, d, s, n) ){
+        return false;
+      }
+   }
+   return true;
+}
+int32_t main(){
+  int te; cin>>te;
+  while( te-- ){
+    int n; cin>>n;
+   if( milar(n) ){
+    cout<<"YES\n";
+   }
+   else {
+    cout<<"NO\n";
+   }
+  }
+}
